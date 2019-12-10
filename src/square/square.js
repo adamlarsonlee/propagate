@@ -15,7 +15,7 @@ function square(m, cell) {
     }
 
     return {
-      view: () => m('.w-100.h-100', getDivs(25)),
+      view: () => m('.w-100.h-100', getDivs(50)),
     };
   }
 

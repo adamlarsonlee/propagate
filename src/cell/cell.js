@@ -16,7 +16,7 @@ function cell(m, eventEmitter) {
       'orange',
       'gray',
       'purple',
-      'rainbow'
+      'rainbow',
     ];
 
     function flicker(color) {
@@ -37,7 +37,7 @@ function cell(m, eventEmitter) {
     }
 
     function emit(epicenter, color) {
-      eventEmitter.emit('propagate', {
+      eventEmitter.emit(`propagate-${x}-${y}`, {
         epicenter,
         edge: { x, y },
         color,
@@ -66,17 +66,27 @@ function cell(m, eventEmitter) {
       return Math.abs(edge.x - epicenter.x) + Math.abs(edge.y - epicenter.y) >= Math.abs(x - epicenter.x) + Math.abs(y - epicenter.y);
     }
 
+    function registerAdjacentEvents() {
+      for (let adjacentX = -1; adjacentX < 2; adjacentX += 1) {
+        for (let adjacentY = -1; adjacentY < 2; adjacentY += 1) {
+          if (adjacentX !== 0 || adjacentY !== 0) { 
+            eventEmitter.on(`propagate-${x - adjacentX}-${y - adjacentY}`, ({ epicenter, edge, color }) => {
+              if (edgeIsAdjacent(edge) && !between(epicenter, edge) && !is(edge) && !is(epicenter)) {
+                if (flicker(color)) {
+                  setTimeout(() => emit(epicenter, color), flickerDuration);
+                }
+              }
+            });
+          }
+        }
+      }
+    }
+
     return {
       oninit: ({ attrs }) => {
         x = attrs.x;
         y = attrs.y;
-        eventEmitter.on('propagate', ({ epicenter, edge, color }) => {
-          if (edgeIsAdjacent(edge) && !between(epicenter, edge) && !is(edge) && !is(epicenter)) {
-            if (flicker(color)) {
-              setTimeout(() => emit(epicenter, color), flickerDuration);
-            }
-          }
-        });
+        registerAdjacentEvents();
       },
       view: () => getCell(),
     };
