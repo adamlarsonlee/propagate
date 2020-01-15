@@ -1,2 +1,5 @@
-# mithril-skeleton
-This is the Activated Research Company web app starter to get you up and running quickly on our standard stack.
+# propagate
+
+This project is a fun and learning experiment around propagating events across a large number of virtual DOM nodes using mithril.
+
+Clicking anywhere on the page to trigger the propagating event. The goal of the project is to reach very high performance and be visually appealing. The dream would be do create a visual ripple much like dropping something into water.
