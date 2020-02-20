@@ -20,7 +20,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      title: 'ARC Mithril Skeleton',
+      title: '( ( ( propagate ) ) )',
       template: './src/index.html',
       favicon: './src/asset/favicon.ico',
     }),

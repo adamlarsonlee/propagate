@@ -69,7 +69,7 @@ function cell(m, eventEmitter) {
     function registerAdjacentEvents() {
       for (let adjacentX = -1; adjacentX < 2; adjacentX += 1) {
         for (let adjacentY = -1; adjacentY < 2; adjacentY += 1) {
-          if (adjacentX !== 0 || adjacentY !== 0) { 
+          if (adjacentX !== 0 || adjacentY !== 0) {
             eventEmitter.on(`propagate-${x - adjacentX}-${y - adjacentY}`, ({ epicenter, edge, color }) => {
               if (edgeIsAdjacent(edge) && !between(epicenter, edge) && !is(edge) && !is(epicenter)) {
                 if (flicker(color)) {
@@ -95,4 +95,6 @@ function cell(m, eventEmitter) {
   return component;
 }
 
-module.exports = cell;
+module.exports = (container) => {
+  container.service('cell', cell, 'm', 'eventEmitter');
+};

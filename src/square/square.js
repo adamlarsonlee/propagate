@@ -22,4 +22,6 @@ function square(m, cell) {
   return component;
 }
 
-module.exports = square;
+module.exports = (container) => {
+  container.service('square', square, 'm', 'cell');
+};

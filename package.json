@@ -13,6 +13,7 @@
     "start": "NODE_ENV=development webpack-dev-server --open --config webpack.development.js"
   },
   "dependencies": {
+    "bottlejs": "^1.7.2",
     "mithril": "^2.0.4",
     "tachyons": "^4.11.1"
   },
