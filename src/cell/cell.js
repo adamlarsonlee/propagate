@@ -27,11 +27,9 @@ function cell(m, eventEmitter) {
       } else {
         background = color;
       }
-      m.redraw();
       setTimeout(() => {
         background = 'white';
         flickering = false;
-        m.redraw();
       }, flickerDuration);
       return true;
     }
